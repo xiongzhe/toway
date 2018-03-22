@@ -12,6 +12,6 @@ module.exports = {
   'upload/img': host + 'upload/img',
   //报名
   'entry': host + 'entry',
-  //活动报名名单 
+  //活动报名名单    
   'entry/entry-list': host + 'entry/entry-list',
 }
