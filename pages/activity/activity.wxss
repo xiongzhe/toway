@@ -1,0 +1,202 @@
+/* pages/activity/activity.wxss */
+@import "../../wxParse/wxParse.wxss";
+
+.view {
+  width: 100%;
+  height: 100%;
+  justify-content: space-between;
+}
+
+.cView {
+  width: 100%;
+  height: 100%;
+  margin-bottom: 100rpx;
+}
+
+.headImgView {
+  width: 100%;
+  height: 300rpx;
+  text-align: center;
+}
+
+.headImg {
+  width: 100rpx;
+  height: 100rpx;
+  margin-top: 60rpx;
+  border-radius: 50%;
+}
+
+.username {
+  font-size: 14px;
+  color: #333;
+  display: block;
+}
+
+.divideView {
+  width: 100%;
+  height: 10rpx;
+  margin-top: 30rpx;
+  align-items: center;
+}
+
+.divide {
+  margin: 0rpx auto;
+  width: 50rpx;
+  height: 10rpx;
+  background-color: #ddd;
+  align-items: center;
+}
+
+.title {
+  width: 100%;
+  font-size: 18px;
+  margin-bottom: 20rpx;
+  text-align: center;
+}
+
+.applyInfo {
+  padding-left: 5%;
+  padding-right: 5%;
+  font-size: 14px;
+  color: #666;
+}
+
+.layout {
+  width: 100%;
+  height: 80rpx;
+  line-height: 80rpx;
+  display: flex;
+  flex-direction: row;
+}
+
+.shape {
+  width: 24rpx;
+  height: 24rpx;
+  background-color: #333;
+  margin-top: 28rpx;
+  margin-right: 10rpx;
+}
+
+.detail {
+  padding-left: 5%;
+  padding-right: 5%;
+}
+
+.detailTitle {
+  width: 100%;
+  font-size: 16px;
+  text-align: center;
+  margin-top: 20rpx;
+}
+
+.divideView {
+  width: 100%;
+  height: 10rpx;
+  margin-top: 10rpx;
+  align-items: center;
+}
+
+.divide {
+  margin: 0rpx auto;
+  width: 50rpx;
+  height: 10rpx;
+  background-color: #ddd;
+  align-items: center;
+}
+
+.detailDetail {
+  word-break: break-all;
+  margin-top: 20rpx;
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 50rpx;
+}
+
+.applyTotal {
+  width: 100%;
+  margin-top: 15rpx;
+  text-align: center;
+  font-size: 14px;
+}
+
+.images {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  margin: 20rpx;
+}
+
+.singleView {
+  margin: 10rpx;
+}
+
+.singleImg {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+}
+
+.singleName {
+  width: 80rpx;
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  font-size: 8px;
+  justify-content: center;
+  color: #333;
+  white-space: nowrap;
+}
+
+.bottomView {
+  width: 100%;
+  height: 100rpx;
+  line-height: 100rpx;
+  display: flex;
+  flex-direction: row;
+  background-color: #fbfbfb;
+  position: fixed;
+  bottom: -1rpx;
+  padding: 0rpx;
+}
+
+.money {
+  color: #f3b142;
+  height: 100%;
+  font-size: 18px;
+  padding-left: 20rpx;
+  margin: 0rpx;
+}
+
+.unit {
+  font-size: 10px;
+}
+
+.members {
+  width: 20%;
+  height: 100%;
+  background-color: #f3b142;
+  color: white;
+  font-size: 16px;
+  text-align: center;
+  position: absolute;
+  right: 40%;
+  display: none;
+}
+
+.apply {
+  width: 40%;
+  height: 100%;
+  color: white;
+  font-size: 16px;
+  text-align: center;
+  position: absolute;
+  right: 0rpx;
+}
+
+.activityImages {
+  text-align: center;
+}
+
+.activityImage {
+  margin-top: 50rpx;
+}

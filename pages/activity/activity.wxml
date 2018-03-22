@@ -1,0 +1,83 @@
+<!--pages/activity/activity.wxml-->
+
+<import src="../../wxParse/wxParse.wxml" />
+
+<view class='view'>
+  <scroll-view class='cView' scroll-y='true'>
+    <view class='headImgView'>
+      <image class='headImg' src='{{headImg}}'></image>
+      <text class='username'>{{name}}</text>
+      <view class='divideView'>
+        <view class='divide'></view>
+      </view>
+    </view>
+    <view class='title'>{{title}}</view>
+    <view class='line3' />
+    <view class='applyInfo'>
+      <view class='layout'>
+        <view class='shape'></view>
+        {{time}}
+      </view>
+      <view class='line3' />
+      <view class='layout'>
+        <view class='shape'></view>
+        {{phone}}
+      </view>
+      <view class='line3' />
+      <view wx:if='{{price > 0}}' class='layout'>
+        <view class='shape'></view>
+        ¥ {{price}}元/人
+      </view>
+      <view wx:else class='layout'>
+        <view class='shape'></view>
+        免费
+      </view>
+      <view class='line3' />
+      <view class='layout'>
+        <view class='shape'></view>
+        {{address}}
+      </view>
+    </view>
+    <view class='line10' />
+    <view class='detail'>
+      <view class='detailTitle'>活动详情介绍</view>
+      <view class='divideView'>
+        <view class='divide'></view>
+      </view>
+      <text class='detailDetail'>
+        {{detail}}
+      </text>
+    </view>
+    <view class='activityImages'>
+      <image class='activityImage' mode='widthFix' wx:key='activityImages' wx:for='{{activityImages}}' src='{{item}}' bindtap='onClickImages' data-index='{{index}}'></image>
+    </view>
+    <view class='line10' />
+    <view>
+      <view class='detailTitle'>报名人数</view>
+      <view class='divideView'>
+        <view class='divide'></view>
+      </view>
+      <view class='applyTotal'>
+        <text class='themeColorText'>{{num}}</text>/
+        <text wx:if='{{numLimit == 0}}'>无限人</text>
+        <text wx:else>{{numLimit}}</text>
+      </view>
+      <view class='images'>
+        <view class='singleView' wx:key='images' wx:for="{{imageArray}}">
+          <view>
+            <image class='singleImg' src='{{item.avatar_url}}'></image>
+            <text class='singleName'>{{item.name}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class='line10' />
+  </scroll-view>
+  <view class='bottomView'>
+    <view class='money'>¥{{price}}
+      <text class='unit'>元/人</text>
+    </view>
+    <view class='members' bindtap='members' style='display:{{membersDisplay}}'>名单</view>
+    <view style='background-color: {{applyBgColor}}' class='apply' bindtap='apply'>{{applyText}}</view>
+  </view>
+</view>

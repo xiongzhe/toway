@@ -1,0 +1,27 @@
+<!--pages/members/members.wxml-->
+<view>
+  <view class='selled'>
+    <text class='selledText'>已有{{sellNum}}人报名活动</text>
+  </view>
+  <view class='list' wx:key='list' wx:for="{{array}}">
+    <view class='member'>
+      <image class='headImg' src='{{item.user.avatar_url}}'></image>
+      <view class='middle'>
+        <view class='info'>
+          <view class='name'>{{item.name}}</view>
+          <image wx:if='{{item.gender == 1}}' class='gender' src='/image/ic_boy.png'></image>
+          <image wx:elif='{{item.gender == 2}}' class='gender' src='/image/ic_girl.png'></image>
+          <view wx:if='{{item.age > 0}}' class='age'>{{item.age}}</view> 
+          <view class='address'>南山海关登山口</view>          
+        </view>
+        <view class='info'>
+          <view class='phone'>{{item.phone}}</view>
+          <view class='cardId'>{{item.id_card}}</view>
+        </view>
+      </view>
+      <view class='ticketNums'>1张</view>
+    </view>
+    <view class='line3' />
+  </view>
+  <view class='loadMore' style='display:{{loadDisplay}}'>{{loadMoreText}}</view>
+</view>

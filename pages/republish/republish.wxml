@@ -1,0 +1,96 @@
+<!--publish.wxml-->
+<scroll-view class='scrollView' scroll-y="true">
+  <view>
+    <form bindsubmit='confirm'>
+      <input name="title" class='title' placeholder='在这里输入活动标题' value='{{title}}' />
+      <view class='line3' />
+      <textarea name="detail" class='detail' auto-height='true' maxlength='2500' bindinput='bindDetailInput' placeholder='在这里输入活动详情...' value='{{detail}}'/>
+      <view class='detailLong'>{{detailLong}}　</view>
+      <view class='line3' />
+      <view class='images' style='display:{{imagesDisplay}}'>
+        <view class='singleView' wx:key='singleView' wx:for="{{imageArray}}">
+          <image class='singleImg' src='{{item}}' bindtap='checkImg' data-index='{{index}}'></image>
+          <image class='deleteImg' src='/image/close4.svg' bindtap='deleteImg' data-index='{{index}}'></image>
+        </view>
+        <image class='addImg' src='/image/plus.png' bindtap='addImg'></image>
+      </view>
+       <view style='display:{{addImgViewDisplay}}' bindtap='addImg'>
+        <view class='addImgText themeColorText'>添加活动图片</view>
+        <view class='addImgTip'>默认第一张为封面图片</view>
+      </view>
+      <view class='line3' />
+      <view class='layout'>
+        <text class='tip'>开始时间</text>
+        <image class='arrow' src='/image/arrow.png'></image>
+        <picker class='timeTime' mode="time" value="{{startTime}}" start="00:00" end="24:00" bindchange="bindStartTimeTimeChange">
+          <view class="startTime">
+            {{startTime}}
+          </view>
+        </picker>
+        <view class='divide'>　|　</view>
+        <picker class='timeDate' mode="date" value="{{startDate}}" start="2000-01-01" end="2100-01-01" bindchange="bindStartTimeDateChange">
+          <view class="startDate">
+            {{startDate}}
+          </view>
+        </picker>
+      </view>
+      <view class='line3' />
+      <view class='layout'>
+        <text class='tip'>结束时间</text>
+        <image class='arrow' src='/image/arrow.png'></image>
+        <picker class='timeTime' mode="time" value="{{endTime}}" start="00:00" end="24:00" bindchange="bindEndTimeTimeChange">
+          <view class="endTime">
+            {{endTime}}
+          </view>
+        </picker>
+        <view class='divide'>　|　</view>
+        <picker class='timeDate' mode="date" value="{{endDate}}" start="2000-01-01" end="2100-01-01" bindchange="bindEndTimeDateChange">
+          <view class="endDate">
+            {{endDate}}
+          </view>
+        </picker>
+      </view>
+      <view class='line10' />
+      <view class='layout'>
+        <text class='tip'>活动地点</text>
+        <image class='arrow' src='/image/arrow.png'></image>
+        <input name='address' class='addressInput' placeholder='输入活动地址' value='{{address}}'>06月19日(周日)09:30</input>
+      </view>
+      <view class='line10' />
+      <view class='layout'>
+        <text class='tip'>人数限制</text>
+        <image class='arrow' src='/image/arrow.png'></image>
+        <input name='numLimit' class='numLimit' placeholder='默认无限制' type="number" value='{{numLimit}}'/>
+      </view>
+      <view class='line3' />
+      <view class='layout'>
+        <text class='tip'>组织者电话</text>
+        <image class='arrow' src='/image/arrow.png'></image>
+        <input name='phone'class='phone' type="number" value='{{phone}}'/>
+      </view>
+      <view class='line10' />
+      <view class='layout'>
+        <text class='tip'>活动费用(元)</text>
+        <image class='arrow' src='/image/arrow.png'></image>
+        <input name='money' class='money' type="number" placeholder='免费' value='{{money}}'/>
+      </view>
+      <view class='line10' />
+      <view>
+        <view class='layout'>
+          <text class='tip'>用户报名必填项</text>
+        </view>
+        <view class='requiredFields'>
+          <button class='nameButton' bindtap="clickName" style="color:{{nameColor}}; border-color:{{nameBorderColor}};">姓名</button>
+          <button class='phoneButton' bindtap="clickPhone" style="color:{{phoneColor}}; border-color:{{phoneBorderColor}};">手机号码</button>
+          <button class='cardIdButton' bindtap="clickCardId" style="color:{{cardIdColor}}; border-color:{{cardIdBorderColor}};">身份证号码</button>
+        </view>
+        <view class='requiredFields'>
+          <button class='sexButton' bindtap="clickSex" style="color:{{sexColor}}; border-color:{{sexBorderColor}};">性别</button>
+          <button class='ageButton' bindtap="clickAge" style="color:{{ageColor}}; border-color:{{ageBorderColor}};">年龄</button>
+        </view>
+      </view>
+      <view class='line10' />
+      <button form-type="submit" class='confirm themeColorBg'>{{confirmText}}</button>
+    </form>
+  </view>
+</scroll-view>

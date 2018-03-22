@@ -1,0 +1,25 @@
+<!--pages/apply/apply.wxml-->
+<view>
+  <view class='tip'><text class='tipText'>请完善一下信息</text></view>
+  <view>
+    <form bindsubmit='confirm'>
+      <view wx:key='apply' wx:for="{{array}}" wx:for-index='i'>
+        <view class='layout'>
+          <text class='tip2'>{{item.name}}</text>
+          <block wx:if="{{item.type != 'picker'}}">
+            <input name='{{item.key}}' class='inputInfo' type='{{item.type}}' placeholder='{{item.placeholder}}' />
+          </block>
+          <block wx:else>
+            <radio-group class="radio-group" bindchange="radioChange">
+              <label wx:key='radio' class="radio" wx:for="{{item.option_value}}" wx:for-index='j'>
+                <radio value="{{item.value}}" checked="true" />{{item.title}}
+              </label>
+            </radio-group>
+          </block>
+        </view>
+        <view class='line3' />
+      </view>
+      <button form-type="submit" class='confirm themeColorBg'>确认报名</button>
+    </form>
+  </view>
+</view>

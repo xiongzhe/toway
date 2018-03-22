@@ -1,0 +1,43 @@
+<!--index.wxml-->
+
+<view class='cView'>
+  <view wx:key='activityList' wx:for='{{array}}' class='view' style='height:{{itemHeight}}' bindtap='onItemClick' data-index='{{index}}'>
+    <view class='history' style='display:{{item.historyDisplay}}'>-- 历史 --</view> 
+    <view class='userView'>
+      <view class='left'>
+        <image class='userImg' src='{{item.user.avatar_url}}'></image>
+        <view class="vericalUserView">
+          <text class="name">{{item.user.name}}</text>
+          <text class="time">{{item.start_date_text}}</text>
+        </view>
+      </view>
+      <text wx:if='{{item.status == 1}}' class='status themeColorText'>报名中</text>
+      <text wx:elif='{{item.status == 2}}' class='status themeColorText'>活动中</text>
+      <text wx:elif='{{item.status == 3}}' class='status activityOver'>已结束</text>
+    </view>
+    <view class='bottom'>
+      <view class='activityImgView'>
+        <image class='activityImg' mode='aspectFit' src='{{item.pic}}'></image>
+      </view>
+      <view class='bottomRight'>
+        <text class="title">{{item.title}}</text>
+        <text class="date">{{item.activity_date_text}}</text>
+        <text class="address">{{item.address}}</text>
+        <view class='priceView'>
+          <text wx:if='{{item.price > 0}}' class="price">¥{{item.price}}<text class="unit">元/人</text></text>
+          <text wx:else class="price">免费</text>
+          <view class='applyView'>
+            <view class="applyInfo">　|　有</view>
+            <view class="applyNums">{{item.num}}</view>
+            <view class="applyInfo">/</view>
+            <view class='bigger' wx:if='{{item.total == 0}}'>∞</view>
+            <view class="applyInfo" wx:else>{{item.total}}人</view>
+            <view class="applyInfo">报名</view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class='line15'></view>
+  </view>
+  <view class='loadMore' style='display:{{loadDisplay}}'>{{loadMoreText}}</view>
+</view>

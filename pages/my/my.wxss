@@ -1,0 +1,237 @@
+/* pages/my/my.wxss */
+
+.scrollView {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.headImgView {
+  width: 100%;
+  height: 300rpx;
+  text-align: center;
+}
+
+.headImg {
+  width: 100rpx;
+  height: 100rpx;
+  margin-top: 60rpx;
+  border-radius: 50%;
+}
+
+.username {
+  font-size: 14px;
+  color: #333;
+  display: block;
+}
+
+.divideView {
+  width: 100%;
+  height: 10rpx;
+  margin-top: 30rpx;
+  align-items: center;
+}
+
+.divide {
+  margin: 0rpx auto;
+  width: 50rpx;
+  height: 10rpx;
+  background-color: #ddd;
+  align-items: center;
+}
+
+.titleButton {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  font-size: 14px;
+}
+
+.lanuchedActivty {
+  width: 50%;
+  height: 100%;
+  text-align: center;
+  margin-right: 100rpx;
+}
+
+.joinActivty {
+  width: 50%;
+  height: 100%;
+  text-align: center;
+  margin-left: 100rpx;
+}
+
+.titleBottomView {
+  width: 100%;
+  margin-top: 30rpx;
+  border-radius: 10rpx;
+  align-items: center;
+}
+
+.titleBottom {
+  margin: 0rpx auto;
+  width: 200rpx;
+  height: 5rpx;
+  background-color: #333;
+  align-items: center;
+}
+
+.list {
+  width: 100%;
+}
+
+.lanuchedList {
+  width: 100%;
+}
+
+.joinList {
+  width: 100%;
+  display: none;    
+}
+
+.lanuchedView {
+  width: 100%;
+  height: 470rpx;
+  display: flex;
+  flex-direction: column;
+}
+
+.joinView {
+  width: 100%;
+  height: 380rpx;
+  display: flex;
+  flex-direction: column;
+}
+
+.userView {
+  width: 100%;
+  height: auto;
+}
+
+.left {
+  flex-direction: row;
+  display: flex;
+  float: left;
+  margin-top: 40rpx;
+  margin-bottom: 20rpx;
+  margin-left: 20rpx;
+  margin-right: 20rpx;
+}
+
+.userImg {
+  width: 60rpx;
+  height: 60rpx;
+  border-radius: 50%;
+}
+
+.vericalUserView {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  margin-left: 10rpx;
+}
+
+.time {
+  color: #bbb;
+  font-size: 10px;
+}
+
+.status {
+  width: 100rpx;
+  height: 70rpx;
+  line-height: 70rpx;
+  font-size: 14px;
+  border-radius: 10rpx;
+  float: right;
+  margin-top: 40rpx;
+  margin-bottom: 20rpx;
+  margin-left: 20rpx;
+  margin-right: 20rpx;
+}
+
+.bottom {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+}
+
+.activityImg {
+  width: 200rpx;
+  height: 200rpx;
+  float: left;
+  margin: 20rpx;
+}
+
+.bottomRight {
+  width: 500rpx;
+  flex-direction: column;
+  display: flex;
+  float: left;
+  margin: 20rpx;
+}
+
+.name {
+  font-size: 14px;
+  color: #333;
+}
+
+.title {
+  margin-top: 5rpx;
+  font-size: 16px;
+  color: #333333;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.date {
+  color: #bbb;
+  font-size: 12px;
+  margin-top: 10rpx;
+}
+
+.address {
+  color: #bbb;
+  font-size: 13px;
+  margin-top: 10rpx;
+}
+
+.price {
+  margin-top: 15rpx;
+  color: #f4ac43;
+  font-size: 14px;
+}
+
+.unit {
+  color: #f4ac43;
+  font-size: 8px;
+}
+
+.applyInfo {
+  color: #bbb;
+  font-size: 10px;
+}
+
+.applyNums {
+  color: #2dbb24;
+}
+
+.launchButton {
+  width: 100%;
+  height: 80rpx;
+  line-height: 80rpx;
+  text-align: center;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.loadMore {
+  width: 100%;
+  height: 70rpx;
+  line-height: 70rpx;
+  font-size: 14px;
+  text-align: center;
+  color: #666;
+}

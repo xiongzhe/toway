@@ -1,0 +1,182 @@
+/**index.wxss**/
+
+.cView {
+  display: flex;
+  flex-direction: column;
+}
+
+.view {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.history {
+  width: 100%;
+  text-align: center;
+  height: 60rpx;
+  background-color: #eee;
+  color: #999;
+  font-size: 14px;
+}
+
+.userView {
+  width: 100%;
+  height: auto;
+}
+
+.left {
+  flex-direction: row;
+  display: flex;
+  float: left;
+  margin-top: 40rpx;
+  margin-bottom: 20rpx;
+  margin-left: 20rpx;
+  margin-right: 20rpx;
+}
+
+.userImg {
+  width: 60rpx;
+  height: 60rpx;
+  border-radius: 50%;
+}
+
+.vericalUserView {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  margin-left: 10rpx;
+}
+
+.name {
+  color: #333;
+  font-size: 14px;
+}
+
+.time {
+  color: #bbb;
+  font-size: 10px;
+}
+
+.status {
+  width: 100rpx;
+  height: 70rpx;
+  line-height: 70rpx;
+  font-size: 14px;
+  border-radius: 10rpx;
+  float: right;
+  margin-top: 40rpx;
+  margin-bottom: 20rpx;
+  margin-left: 20rpx;
+  margin-right: 20rpx;
+}
+
+.bottom {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+}
+
+.activityImg {
+  width: 200rpx;
+  height: 200rpx;
+}
+
+.activityImgView {
+  width: 25%;
+  height: 200rpx;
+  float: left;
+  margin-top: 20rpx;
+  margin-left: 20rpx;
+  margin-bottom: 40rpx;
+  margin-right: 20rpx;
+}
+
+.bottomRight {
+  width: 60%;
+  flex-direction: column;
+  display: flex;
+  float: left;
+  margin-top: 20rpx;
+  margin-left: 20rpx;
+  margin-bottom: 40rpx;
+  margin-right: 20rpx;
+}
+
+.title {
+  margin-top: 5rpx;
+  font-size: 16px;
+  color: #333;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.date {
+  color: #bbb;
+  font-size: 12px;
+  margin-top: 10rpx;
+}
+
+.address {
+  color: #bbb;
+  font-size: 13px;
+  margin-top: 10rpx;
+}
+
+.priceView {
+  margin-top: 15rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+  display: flex;
+  flex-direction: row;
+}
+
+.price {
+  height: 50rpx;
+  color: #f4ac43;
+  font-size: 14px;
+}
+
+.applyView {
+  height: 50rpx;
+  display: flex;
+  flex-direction: row;
+}
+
+.unit {
+  color: #f4ac43;
+  font-size: 8px;
+}
+
+.applyInfo {
+  height: 100%;
+  color: #bbb;
+  font-size: 10px;
+}
+
+.applyNums {
+  font-size: 10px;
+  color: #2dbb24;
+}
+
+.loadMore {
+  width: 100%;
+  height: 70rpx;
+  line-height: 70rpx;
+  font-size: 14px;
+  text-align: center;
+  color: #666;
+}
+
+.activityOver {
+  color: #999;
+}
+
+.bigger {
+  height: 100%;
+  font-size: 14px;
+  margin-top: 3rpx;
+  color: #bbb;
+}
