@@ -1,7 +1,5 @@
 <!--pages/activity/activity.wxml-->
 
-<import src="../../wxParse/wxParse.wxml" />
-
 <view class='view'>
   <scroll-view class='cView' scroll-y='true'>
     <view class='headImgView'>
