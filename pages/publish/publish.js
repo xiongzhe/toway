@@ -26,10 +26,13 @@ var themeColor = '#1fb681'
 var uploadImages = []
 //活动图片
 var activityImages = []
+//是否显示授权按钮
+var isShowButton = true;
 
 Page({
   data: {
-    imageArray: images
+    imageArray: images,
+    contentDisplay: 'none'
   },
 
   /**
@@ -64,7 +67,8 @@ Page({
       addressColor: '#bbb',
       addressBorderColor: '#bbb',
       detailLong: '0 / 2500',
-      imagesDisplay: 'none'
+      imagesDisplay: 'none',
+      isShowButton: true
     });
   },
 
@@ -79,7 +83,19 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    var userInfo = app.globalData.userInfo
+    if (userInfo) {
+      isShowButton = false;
+      this.setData({
+        isShowButton: isShowButton,
+        contentDisplay: 'block'
+      });
+    } else {
+      isShowButton = true;
+      this.setData({
+        isShowButton: isShowButton
+      });
+    }
   },
 
   /**
@@ -115,6 +131,21 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+
+  /**
+  * 点击授权按钮获取用户信息
+  */
+  onGotUserInfo: function (e) {
+    const _this = this;
+    app.getUserInfo(e.detail, function (res) {
+      isShowButton = false;
+      _this.setData({
+        isShowButton: isShowButton,
+        contentDisplay: 'block'
+      })
+      console.log('授权成功');
+    })
   },
 
   /**

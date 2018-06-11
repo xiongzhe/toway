@@ -10,40 +10,13 @@ App({
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
-    // // 登录
-    // wx.login({
-    //   success: res => {
-    //     // 发送 res.code 到后台换取 openId, sessionKey, unionId
-    //     var url = api['wx-login'];
-    //     var code = res.code;
-    //     var _this = this;
-    //     wx.request({
-    //       url: url,
-    //       method: 'GET',
-    //       data: {
-    //         "code": code
-    //       },
-    //       header: net.getHeader(),
-    //       success: function (res) {
-    //         net.setAuthorization(res.data.data.token)
-    //         user.saveUserInfo(net.getHeader(), function (res) {
-    //           _this.globalData.userInfo = res;
-    //           console.log(_this.globalData.userInfo);
-    //         })
-    //       },
-    //       fail: function (res) {
-    //         console.log(res);
-    //       }
-    //     })
-    //   }
-    // })
   },
 
 
   /**
    * 获取用户信息
    */
-  getUserInfo: function (that, callback) {
+  getUserInfo (userInfo, callback) {
     var groupData = this.globalData;
     // 登录
     wx.login({
@@ -51,7 +24,6 @@ App({
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
         var url = api['wx-login'];
         var code = res.code;
-        var _this = that;
         wx.request({
           url: url,
           method: 'GET',
@@ -61,7 +33,7 @@ App({
           header: net.getHeader(),
           success: function (res) {
             net.setAuthorization(res.data.data.token)
-            user.saveUserInfo(net.getHeader(), function (res) {
+            user.getWXUserInfo(userInfo, function (res) {
               groupData.userInfo = res;
               if (callback != null) {
                 callback(res)
@@ -128,6 +100,6 @@ App({
   },
 
   globalData: {
-    userInfo: null
+    userInfo: null,
   }
 })

@@ -2,6 +2,7 @@
 
 //获取应用实例
 const app = getApp()
+const user = require('../../controller/user.js')
 const pageSize = 10
 
 var net = require('../../net.js')
@@ -10,12 +11,18 @@ var array = []
 var page = 1
 //是否有显示历史标签
 var isShowHistory = false;
+//是否显示授权按钮
+var isShowButton = true;
+//是否获取过数据（获取过之后就不用在onShow中重复获取了）
+var isFisrtGetData = false;
 
 Page({
 
   data: {
     scrollTop: 0,
-    loadDisplay: 'none'
+    loadDisplay: 'none',
+    contentDisplay: 'none',
+    array: [],
   },
 
   onLoad: function (options) {
@@ -24,16 +31,6 @@ Page({
     wx.showShareMenu({
       withShareTicket: true
     })
-
-    array = []
-    this.setData({
-      array: array,
-      loadDisplay: 'none',
-    });
-    wx.showLoading({
-      title: '加载中...',
-    })
-    initData(this)
   },
 
   /**
@@ -47,7 +44,26 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    console.log('onShow')
+    var userInfo = app.globalData.userInfo
+    if (userInfo) {
+      isShowButton = false;
+      if (!isFisrtGetData) {
+        wx.showLoading({
+          title: '加载中...',
+        })
+        getActivityList(this, userInfo);
+        isFisrtGetData = true;
+      }
+      this.setData({
+        isShowButton: isShowButton,
+        contentDisplay: 'block'
+      });
+    } else {
+      isShowButton = true;
+      this.setData({
+        isShowButton: isShowButton
+      });
+    }
   },
 
   /**
@@ -87,13 +103,6 @@ Page({
   },
 
   /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
    * 点击item进入活动详情
    */
   onItemClick: function (e) {
@@ -101,6 +110,26 @@ Page({
     var activityId = array[index].id
     wx.navigateTo({
       url: '/pages/activity/activity?activityId=' + activityId + '&tab=1'
+    })
+  },
+
+  /**
+   * 点击授权按钮获取用户信息
+   */
+  onGotUserInfo: function (e) {
+    const _this = this
+    wx.showLoading({
+      title: '加载中...',
+    })
+    app.getUserInfo(e.detail, function (res) {
+      isShowButton = false;
+      _this.setData({
+        isShowButton: isShowButton,
+        contentDisplay: 'block'
+      })
+      var userInfo = res;
+      getActivityList(_this, userInfo);
+      isFisrtGetData = true;
     })
   }
 })
@@ -189,7 +218,7 @@ function setHistoryDisplay(_this, curArray) {
       curArray[i].historyDisplay = 'block'
       curArray[i].itemHeight = '460rpx'
       isShowHistory = true
-    } else{
+    } else {
       curArray[i].historyDisplay = 'none'
       curArray[i].itemHeight = '400rpx'
     }

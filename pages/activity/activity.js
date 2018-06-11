@@ -12,6 +12,8 @@ var activityInfo
 var tab
 //活动id
 var activityId
+//是否显示授权按钮
+var isShowButton = true;
 
 Page({
 
@@ -19,14 +21,14 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    contentDisplay: 'none'
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
+
     //设置可转发
     wx.showShareMenu({
       withShareTicket: true
@@ -53,18 +55,22 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    wx.showLoading({
-      title: '加载中...',
-    })
     var userInfo = app.globalData.userInfo
     if (userInfo) {
-      getActivityInfo(activityId, this);
-    } else {
-      var _this = this
-      app.getUserInfo(this, function (res) {
-        var userInfo = res;
-        getActivityInfo(activityId, _this);
+      isShowButton = false;
+      wx.showLoading({
+        title: '加载中...',
       })
+      getActivityInfo(activityId, this);
+      this.setData({
+        isShowButton: isShowButton,
+        contentDisplay: 'block'
+      });
+    } else {
+      isShowButton = true;
+      this.setData({
+        isShowButton: isShowButton
+      });
     }
   },
 
@@ -110,6 +116,25 @@ Page({
         //util.showTip('转发失败')
       }
     }
+  },
+
+  /**
+   * 点击授权按钮获取用户信息
+   */
+  onGotUserInfo: function (e) {
+    const _this = this
+    wx.showLoading({
+      title: '加载中...',
+    })
+    app.getUserInfo(e.detail, function (res) {
+      isShowButton = false;
+      _this.setData({
+        isShowButton: isShowButton,
+        contentDisplay: 'block',
+      })
+      var userInfo = res;
+      getActivityInfo(activityId, _this);
+    })
   },
 
   /**

@@ -15,6 +15,10 @@ var lanuchedPage = 1
 var joinPage = 1
 //当前tab 1 发起活动 2 参与活动
 var curTab = 2
+//是否显示授权按钮
+var isShowButton = true;
+//是否获取过数据（获取过之后就不用在onShow中重复获取了）
+var isFisrtGetData = false;
 
 Page({
 
@@ -22,7 +26,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    lanuchedBottomDisplay: 'none'
+    lanuchedBottomDisplay: 'none',
+    contentDisplay: 'none'
   },
 
   /**
@@ -32,33 +37,12 @@ Page({
 
     //设置不可转发
     wx.hideShareMenu();
-    
-    var userInfo = app.globalData.userInfo
-    if (userInfo) {
-      this.setData({
-        headImg: userInfo.avatarUrl,
-        username: userInfo.nickName
-      })
-    } else {
-      var _this = this
-      app.getUserInfo(this, function (res) {
-        var userInfo = res;
-        _this.setData({
-          headImg: userInfo.avatarUrl,
-          username: userInfo.nickName
-        })
-      })
-    }
-    lanuchedArray = []
+
     this.setData({
       lanuchedArray: lanuchedArray,
       loadDisplay: 'none',
+      isShowButton: true
     });
-    //初始化数据
-    wx.showLoading({
-      title: '加载中...',
-    })
-    initData(this)
   },
 
   /**
@@ -72,7 +56,31 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    var userInfo = app.globalData.userInfo
+    if (userInfo) {
+      isShowButton = false;
+      this.setData({
+        headImg: userInfo.avatarUrl,
+        username: userInfo.nickName
+      })
+      if (!isFisrtGetData) {
+        //初始化数据
+        wx.showLoading({
+          title: '加载中...',
+        })
+        initData(this)
+        isFisrtGetData = true;
+      }
+      this.setData({
+        isShowButton: isShowButton,
+        contentDisplay: 'block'
+      });
+    } else {
+      isShowButton = true;
+      this.setData({
+        isShowButton: isShowButton
+      });
+    }
   },
 
   /**
@@ -187,6 +195,32 @@ Page({
     wx.navigateTo({
       url: '/pages/republish/republish?activityId=' + activityId + '&tab=2'
     })
+  },
+
+  /**
+   * 点击授权按钮获取用户信息
+   */
+  onGotUserInfo: function (e) {
+    const _this = this
+    wx.showLoading({
+      title: '加载中...',
+    })
+    app.getUserInfo(e.detail, function (res) {
+      isShowButton = false;
+      var userInfo = res;
+      _this.setData({
+        isShowButton: isShowButton,
+        headImg: userInfo.avatarUrl,
+        username: userInfo.nickName,
+        contentDisplay: 'block'
+      })
+      //初始化数据
+      wx.showLoading({
+        title: '加载中...',
+      })
+      initData(_this)
+      isFisrtGetData = true;
+    })
   }
 })
 
@@ -213,14 +247,7 @@ function loadMore(_this) {
 function initData(that) {
   var _this = that
   var userInfo = app.globalData.userInfo
-  if (userInfo) {
-    getActivityList(_this, userInfo);
-  } else {
-    app.getUserInfo(that, function (res) {
-      var userInfo = res;
-      getActivityList(_this, userInfo);
-    })
-  }
+  getActivityList(_this, userInfo);
 }
 
 /**

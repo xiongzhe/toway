@@ -1,85 +1,92 @@
 <!--my.wxml-->
 <view>
-  <view class='headImgView'>
-    <image class='headImg' src='{{headImg}}'></image>
-    <text class='username'>{{username}}</text>
-    <view class='divideView'>
-      <view class='divide'></view>
-    </view>
-  </view>
-  <view class='titleButton'>
-    <view class='joinActivty' bindtap='clickJoinList'>
-      <text>参与活动</text>
-      <view class='titleBottomView'>
-        <view class='titleBottom' style='display:{{joinBottomDisplay}}'></view>
+  <button wx:if='{{isShowButton}}' open-type='getUserInfo' bindgetuserinfo='onGotUserInfo'>点击授权</button>
+  <view wx:else style='display:{{contentDisplay}}'>
+    <view class='headImgView'>
+      <image class='headImg' src='{{headImg}}'></image>
+      <text class='username'>{{username}}</text>
+      <view class='divideView'>
+        <view class='divide'></view>
       </view>
     </view>
-    <view class='lanuchedActivty' bindtap='clickLanuchedList'>
-      <text>发起活动</text>
-      <view class='titleBottomView'>
-        <view class='titleBottom' style='display:{{lanuchedBottomDisplay}}'></view>
+    <view class='titleButton'>
+      <view class='joinActivty' bindtap='clickJoinList'>
+        <text>参与活动</text>
+        <view class='titleBottomView'>
+          <view class='titleBottom' style='display:{{joinBottomDisplay}}'></view>
+        </view>
+      </view>
+      <view class='lanuchedActivty' bindtap='clickLanuchedList'>
+        <text>发起活动</text>
+        <view class='titleBottomView'>
+          <view class='titleBottom' style='display:{{lanuchedBottomDisplay}}'></view>
+        </view>
       </view>
     </view>
-  </view>
-  <view class='line10' />
-  <!-- 活动列表 -->
-  <view class='list'>
-    <!-- 发起活动 -->
-    <view wx:key='lanuchedList' wx:for='{{lanuchedArray}}' class='lanuchedView' style='display:{{lanuchedListDisplay}}'>
-      <view class='userView' bindtap='onLanuchedItemClick' data-index='{{index}}' >
-        <view class='left'>
-          <image class='userImg' src='{{item.user.avatar_url}}'></image>
-          <view class="vericalUserView">
-            <text class="name">{{item.user.name}}</text>
-            <text class="time">{{item.start_date_text}}</text>
+    <view class='line10' />
+    <!-- 活动列表 -->
+    <view class='list'>
+      <!-- 发起活动 -->
+      <view wx:key='lanuchedList' wx:for='{{lanuchedArray}}' class='lanuchedView' style='display:{{lanuchedListDisplay}}'>
+        <view class='userView' bindtap='onLanuchedItemClick' data-index='{{index}}'>
+          <view class='left'>
+            <image class='userImg' src='{{item.user.avatar_url}}'></image>
+            <view class="vericalUserView">
+              <text class="name">{{item.user.name}}</text>
+              <text class="time">{{item.start_date_text}}</text>
+            </view>
+          </view>
+          <text wx:if='{{item.status == 1}}' class='status themeColorText'>报名中</text>
+          <text wx:elif='{{item.status == 2}}' class='status themeColorText'>活动中</text>
+          <text wx:elif='{{item.status == 3}}' class='status themeColorText'>已结束</text>
+        </view>
+        <view class='bottom' bindtap='onLanuchedItemClick' data-index='{{index}}'>
+          <image class='activityImg' mode='aspectFit' src='{{item.pic}}'></image>
+          <view class='bottomRight'>
+            <text class="title">{{item.title}}</text>
+            <text class="date">{{item.activity_date_text}}</text>
+            <text class="address">{{item.address}}</text>
+            <text class="price">¥{{item.price}}<text class="unit">元/人</text>
+            <text class="applyInfo">　|　有<text class="applyNums">{{item.num}}</text>/
+            <text wx:if='{{item.total == 0}}'>∞报名</text>
+            <text wx:else>{{item.total}}人报名</text></text>
+            </text>
           </view>
         </view>
-        <text wx:if='{{item.status == 1}}' class='status themeColorText'>报名中</text>
-        <text wx:elif='{{item.status == 2}}' class='status themeColorText'>活动中</text>
-        <text wx:elif='{{item.status == 3}}' class='status themeColorText'>已结束</text>
+        <view class='line3'></view>
+        <view class='launchButton themeColorText' bindtap='publishAgain' data-index='{{index}}'>再发一次</view>
+        <view class='line15'></view>
       </view>
-      <view class='bottom' bindtap='onLanuchedItemClick' data-index='{{index}}' >
-        <image class='activityImg' mode='aspectFit' src='{{item.pic}}'></image>
-        <view class='bottomRight'>
-          <text class="title">{{item.title}}</text>
-          <text class="date">{{item.activity_date_text}}</text>
-          <text class="address">{{item.address}}</text>
-          <text class="price">¥{{item.price}}<text class="unit">元/人</text>
-          <text class="applyInfo">　|　有<text class="applyNums">{{item.num}}</text>/<text wx:if='{{item.total == 0}}'>∞报名</text><text wx:else>{{item.total}}人报名</text></text>
-          </text>
+      <!-- 参与活动 -->
+      <view wx:key='joinList' wx:for='{{joinArray}}' bindtap='onJoinItemClick' data-index='{{index}}' class='joinView' style='display:{{joinListDisplay}}'>
+        <view class='userView'>
+          <view class='left'>
+            <image class='userImg' src='{{item.user.avatar_url}}'></image>
+            <view class="vericalUserView">
+              <text class="name">{{item.user.name}}</text>
+              <text class="time">{{item.start_date_text}}</text>
+            </view>
+          </view>
+          <text wx:if='{{item.status == 1}}' class='themeColorText status'>报名中</text>
+          <text wx:elif='{{item.status == 2}}' class='themeColorText status'>活动中</text>
+          <text wx:elif='{{item.status == 3}}' class='themeColorText status'>已结束</text>
         </view>
-      </view>
-      <view class='line3'></view>
-      <view class='launchButton themeColorText' bindtap='publishAgain' data-index='{{index}}'>再发一次</view>
-      <view class='line15'></view>
-    </view>
-    <!-- 参与活动 -->
-    <view wx:key='joinList' wx:for='{{joinArray}}' bindtap='onJoinItemClick' data-index='{{index}}' class='joinView' style='display:{{joinListDisplay}}'>
-      <view class='userView'>
-        <view class='left'>
-          <image class='userImg' src='{{item.user.avatar_url}}'></image>
-          <view class="vericalUserView">
-            <text class="name">{{item.user.name}}</text>
-            <text class="time">{{item.start_date_text}}</text>
+        <view class='bottom'>
+          <image class='activityImg' mode='aspectFit' src='{{item.pic}}'></image>
+          <view class='bottomRight'>
+            <text class="title">{{item.title}}</text>
+            <text class="date">{{item.activity_date_text}}</text>
+            <text class="address">{{item.address}}</text>
+            <text class="price">¥{{item.price}}<text class="unit">元/人</text>
+            <text class="applyInfo">　|　有<text class="applyNums">{{item.num}}</text>/
+            <text wx:if='{{item.total == 0}}'>∞报名</text>
+            <text wx:else>{{item.total}}人报名</text></text>
+            </text>
           </view>
         </view>
-        <text wx:if='{{item.status == 1}}' class='themeColorText status'>报名中</text>
-        <text wx:elif='{{item.status == 2}}' class='themeColorText status'>活动中</text>
-        <text wx:elif='{{item.status == 3}}' class='themeColorText status'>已结束</text>
+        <view class='line15'></view>
       </view>
-      <view class='bottom'>
-        <image class='activityImg' mode='aspectFit' src='{{item.pic}}'></image>
-        <view class='bottomRight'>
-          <text class="title">{{item.title}}</text>
-          <text class="date">{{item.activity_date_text}}</text>
-          <text class="address">{{item.address}}</text>
-          <text class="price">¥{{item.price}}<text class="unit">元/人</text>
-          <text class="applyInfo">　|　有<text class="applyNums">{{item.num}}</text>/<text wx:if='{{item.total == 0}}'>∞报名</text><text wx:else>{{item.total}}人报名</text></text>
-          </text>
-        </view>
-      </view>
-      <view class='line15'></view>
+      <view class='loadMore' style='display:{{loadDisplay}}'>{{loadMoreText}}</view>
     </view>
-    <view class='loadMore' style='display:{{loadDisplay}}'>{{loadMoreText}}</view>
   </view>
 </view>
