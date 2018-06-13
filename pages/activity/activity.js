@@ -67,10 +67,7 @@ Page({
         contentDisplay: 'block'
       });
     } else {
-      isShowButton = true;
-      this.setData({
-        isShowButton: isShowButton
-      });
+      this.onGotUserInfo();
     }
   },
 
@@ -126,15 +123,24 @@ Page({
     wx.showLoading({
       title: '加载中...',
     })
-    app.login(function (res) {
-      isShowButton = false;
-      _this.setData({
-        isShowButton: isShowButton,
-        contentDisplay: 'block',
-      })
-      var userInfo = res;
-      getActivityInfo(activityId, _this);
-    })
+    app.login(
+      function (res) {
+        isShowButton = false;
+        _this.setData({
+          isShowButton: isShowButton,
+          contentDisplay: 'block',
+        })
+        var userInfo = res;
+        getActivityInfo(activityId, _this);
+      },
+      //未授权
+      function (res) {
+        isShowButton = true;
+        _this.setData({
+          isShowButton: isShowButton
+        });
+        wx.hideLoading();
+      });
   },
 
   /**

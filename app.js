@@ -16,7 +16,7 @@ App({
   /**
    * 登录
    */
-  login(callback) {
+  login(callback, errCallBack) {
     const _this = this;
     // 登录
     wx.login({
@@ -27,7 +27,7 @@ App({
             _this.getUserInfo(code, userInfo, callback);
           },
           fail: (res) => {
-            console.log(res);
+            errCallBack(res)
           },
         })
       }
