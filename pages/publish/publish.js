@@ -138,7 +138,7 @@ Page({
   */
   onGotUserInfo: function (e) {
     const _this = this;
-    app.getUserInfo(e.detail, function (res) {
+    app.login(function (res) {
       isShowButton = false;
       _this.setData({
         isShowButton: isShowButton,

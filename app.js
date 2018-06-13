@@ -14,36 +14,72 @@ App({
 
 
   /**
-   * 获取用户信息
+   * 登录
    */
-  getUserInfo (userInfo, callback) {
-    var groupData = this.globalData;
+  login(callback) {
+    const _this = this;
     // 登录
     wx.login({
       success: res => {
-        // 发送 res.code 到后台换取 openId, sessionKey, unionId
-        var url = api['wx-login'];
-        var code = res.code;
-        wx.request({
-          url: url,
-          method: 'GET',
-          data: {
-            "code": code
+        wx.getUserInfo({
+          success: (userInfo) => {
+            var code = res.code;
+            _this.getUserInfo(code, userInfo, callback);
           },
-          header: net.getHeader(),
-          success: function (res) {
-            net.setAuthorization(res.data.data.token)
-            user.getWXUserInfo(userInfo, function (res) {
-              groupData.userInfo = res;
-              if (callback != null) {
-                callback(res)
-              }
-            })
-          },
-          fail: function (res) {
+          fail: (res) => {
             console.log(res);
+          },
+        })
+      }
+    })
+  },
+
+  /**
+   * 获取用户信息
+   */
+  getUserInfo: function (code, userInfo, callback) {
+    const _this = this;
+    // 发送 res.code 到后台换取 openId, sessionKey, unionId
+    var url = api['wx-login'];
+    wx.request({
+      url: url,
+      method: 'GET',
+      data: {
+        "code": code
+      },
+      header: net.getHeader(),
+      success: function (res) {
+        _this.saveUserInfo(res, userInfo, callback)
+      },
+      fail: function (res) {
+        console.log(res);
+      }
+    })
+  },
+
+  /**
+   * 保存用户信息
+   */
+  saveUserInfo: function (res, userInfo, callback) {
+    const _this = this;
+    //校验用户当前session_key是否有效
+    wx.checkSession({
+      success: function () {
+        //session_key 未过期，并且在本生命周期一直有效
+        //保存用户信息
+        var groupData = _this.globalData;
+        net.setAuthorization(res.data.data.token)
+        user.getWXUserInfo(userInfo, function (res) {
+          groupData.userInfo = res;
+          if (callback != null) {
+            callback(res)
           }
         })
+      },
+      fail: function () {
+        // session_key 已经失效，需要重新执行登录流程
+        //重新登录
+        _this.getUserInfo(userInfo, callback);
       }
     })
   },

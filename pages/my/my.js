@@ -205,7 +205,7 @@ Page({
     wx.showLoading({
       title: '加载中...',
     })
-    app.getUserInfo(e.detail, function (res) {
+    app.login(function (res) {
       isShowButton = false;
       var userInfo = res;
       _this.setData({
